@@ -1,0 +1,90 @@
+ <style>
+        .border{
+            display: grid;
+            grid-template-columns: auto;
+            grid-template-rows: auto;
+            background-color: rgb(2, 2, 2);
+            grid:wrap;
+            width: 280px;
+            border-radius: 10px;
+            background: size inherit;
+            justify-self: center;
+            
+        }
+        .calc{
+            margin-left: 15px;
+            margin-bottom: 15px;
+            margin-top: 15px;
+            
+            display:grid;
+            grid-template-columns: repeat(4,60px);
+            grid-template-rows:repeat(6,60px);
+            grid-template-areas: "display display display display"
+                                "clear clear delete divide"
+                                "seven eight nine times"
+                                "four five six minus"
+                                "one two three plus"
+                                "zero zero decimal equal";
+        }
+
+        .display{grid-area:display;}
+        .clear{grid-area:clear;}
+        .delete{grid-area:delete;}
+        .divide{grid-area:divide;}
+        .seven{grid-area:seven;}
+        .eight{grid-area:eight;}
+        .nine{grid-area:nine;}
+        .times{grid-area:times;}
+        .four{grid-area:four;}
+        .five{grid-area:five;}
+        .six{grid-area:six;}
+        .minus{grid-area:minus;}
+        .one{grid-area:one;}
+        .two{grid-area:two;}
+        .three{grid-area:three;}
+        .plus{grid-area:plus;}
+        .zero{grid-area:zero;}
+        .equal{grid-area:equal;}
+        .decimal{grid-area:decimal;}
+        .calc{
+            grid-gap:5px;
+            justify-content:start;   
+        }
+       
+        button{
+            font-size:25px;
+            font-weight:bold;
+            border-radius: 15px;
+
+
+        }
+        .display{
+            font-size:25px;
+            font-weight:bold;
+            border-radius: 15px;
+            background-color: rgb(38, 38, 38);
+            color:rgb(239, 238, 238);
+            margin-bottom: 7px;
+        }
+        .op{
+            background-color: rgb(232, 69, 10);
+        }
+        .num{
+            background-color: rgb(184, 181, 181);
+        }
+        .display:hover{
+            color:black;
+            background-color: rgb(229, 226, 226);
+        }
+        
+        .num:active{
+            opacity: 0.5;
+        }
+        .op:active{
+            opacity: 0.5;
+        }
+        .border .calc{
+            
+        }
+
+    </style>

@@ -1,4 +1,4 @@
-<script>
+
   const display = document.querySelector(".display");
   const buttons = document.querySelectorAll(".calc button");
 
@@ -62,4 +62,3 @@
       display.value += sanitized;
     }
   }
-</script>

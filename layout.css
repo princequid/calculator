@@ -1,4 +1,10 @@
- <style>
+    
+         body{
+            display: grid;
+            height: 100vh;
+            place-items: center;
+            background-color: rgb(58, 58, 58);
+        }
         .border{
             display: grid;
             grid-template-columns: auto;
@@ -87,4 +93,4 @@
             
         }
 
-    </style>
+    

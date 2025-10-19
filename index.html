@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calculator</title>
+
+    <style>
+        .border{
+            display: grid;
+            grid-template-columns: auto;
+            grid-template-rows: auto;
+            background-color: rgb(2, 2, 2);
+            grid:wrap;
+            width: 280px;
+            border-radius: 10px;
+            background: size inherit;
+            justify-self: center;
+            
+        }
+        .calc{
+            margin-left: 15px;
+            margin-bottom: 15px;
+            margin-top: 15px;
+            
+            display:grid;
+            grid-template-columns: repeat(4,60px);
+            grid-template-rows:repeat(6,60px);
+            grid-template-areas: "display display display display"
+                                "clear clear delete divide"
+                                "seven eight nine times"
+                                "four five six minus"
+                                "one two three plus"
+                                "zero zero decimal equal";
+        }
+
+        .display{grid-area:display;}
+        .clear{grid-area:clear;}
+        .delete{grid-area:delete;}
+        .divide{grid-area:divide;}
+        .seven{grid-area:seven;}
+        .eight{grid-area:eight;}
+        .nine{grid-area:nine;}
+        .times{grid-area:times;}
+        .four{grid-area:four;}
+        .five{grid-area:five;}
+        .six{grid-area:six;}
+        .minus{grid-area:minus;}
+        .one{grid-area:one;}
+        .two{grid-area:two;}
+        .three{grid-area:three;}
+        .plus{grid-area:plus;}
+        .zero{grid-area:zero;}
+        .equal{grid-area:equal;}
+        .decimal{grid-area:decimal;}
+        .calc{
+            grid-gap:5px;
+            justify-content:start;   
+        }
+       
+        button{
+            font-size:25px;
+            font-weight:bold;
+            border-radius: 15px;
+
+
+        }
+        .display{
+            font-size:25px;
+            font-weight:bold;
+            border-radius: 15px;
+            background-color: rgb(38, 38, 38);
+            color:rgb(239, 238, 238);
+            margin-bottom: 7px;
+        }
+        .op{
+            background-color: rgb(232, 69, 10);
+        }
+        .num{
+            background-color: rgb(184, 181, 181);
+        }
+        .display:hover{
+            color:black;
+            background-color: rgb(229, 226, 226);
+        }
+        
+        .num:active{
+            opacity: 0.5;
+        }
+        .op:active{
+            opacity: 0.5;
+        }
+        .border .calc{
+            
+        }
+
+    </style>
+
+</head>
+<body>
+    <div class="border">
+        <div class="calc">
+            <input type="text" class="display" placeholder="0" readonly>
+            
+            <button class="num clear">C</button>
+            <button class="num delete">&larr;</button>
+            <button class="op divide">&divide;</button>
+            <button class="num seven">7</button>
+            <button class="num eight">8</button>
+            <button class="num nine">9</button>
+            <button class="op times">&times;</button>
+            <button class="num four">4</button>
+            <button class="num five">5</button>
+            <button class="num six">6</button>
+            <button class="op minus">-</button>
+            <button class="num one">1</button>
+            <button class="num two">2</button>
+            <button class="num three">3</button>
+            <button class="op plus">+</button>
+            <button class="num zero">0</button>
+            <button class="num decimal">&middot;
+</button>
+            <button class="op equal">=</button>
+            
+        </div>
+    </div>
+
+    <script>
+  const display = document.querySelector(".display");
+  const buttons = document.querySelectorAll(".calc button");
+
+  let justEvaluated = false; // tracks if "=" was just pressed
+
+  // --- Handle button clicks ---
+  buttons.forEach(button => {
+    button.addEventListener("click", () => handleInput(button.textContent.trim()));
+  });
+
+  // --- Handle keyboard input ---
+  document.addEventListener("keydown", (e) => {
+    const key = e.key;
+
+    if (!isNaN(key) || ["+", "-", "*", "/", "."].includes(key)) {
+      // If key is a number or operator
+      handleInput(key);
+    } else if (key === "Enter" || key === "=") {
+      e.preventDefault(); // prevent form submission
+      handleInput("=");
+    } else if (key === "Backspace") {
+      handleInput("←");
+    } else if (key === "Escape") {
+      handleInput("C");
+    }
+  });
+
+  // --- Main logic handler for both click and keyboard input ---
+  function handleInput(value) {
+    if (value === "C") {
+      display.value = "";
+      justEvaluated = false;
+    } 
+    else if (value === "←") {
+      display.value = display.value.slice(0, -1);
+      justEvaluated = false;
+    } 
+    else if (value === "=") {
+      try {
+        const expression = display.value
+          .replace(/×/g, "*")
+          .replace(/÷/g, "/")
+          .replace(/·/g, ".");
+        
+        display.value = eval(expression);
+        justEvaluated = true;
+      } catch {
+        display.value = "Error";
+        justEvaluated = true;
+      }
+    } 
+    else {
+      // If "=" was just pressed, reset before adding new input
+      if (justEvaluated) {
+        display.value = "";
+        justEvaluated = false;
+      }
+
+      // Replace × and ÷ if typed from keyboard (* and / are valid)
+      const sanitized = value.replace(/\*/g, "×").replace(/\//g, "÷");
+      display.value += sanitized;
+    }
+  }
+</script>
+
+
+</body>
+</html>
